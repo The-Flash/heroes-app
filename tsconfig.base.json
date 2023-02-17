@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@heroes-app/api/feature-config": [
+        "libs/api/feature-config/src/index.ts"
+      ],
+      "@heroes-app/api/heroes": ["libs/api/heroes/src/index.ts"],
+      "@heroes-app/api/utils-config": ["libs/api/utils-config/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

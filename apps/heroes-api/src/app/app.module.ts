@@ -1,11 +1,17 @@
+import { ApiFeatureConfigModule } from '@heroes-app/api/feature-config';
+import { ApiHeroesModule } from '@heroes-app/api/heroes';
+import { PostgresConfiguration } from '@heroes-app/api/utils-config';
 import { Module } from '@nestjs/common';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ApiFeatureConfigModule,
+    TypeOrmModule.forRootAsync({
+      useClass: PostgresConfiguration
+    }),
+    ApiHeroesModule
+  ],
+  controllers: [],
 })
 export class AppModule {}

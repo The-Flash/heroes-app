@@ -3,6 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
+import { AppConfiguration, appConfiguration } from '@heroes-app/api/utils-config';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
@@ -10,12 +11,13 @@ import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const appConfig = app.get<AppConfiguration>(appConfiguration.KEY);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
-  await app.listen(port);
+  app.enableCors();
+  await app.listen(appConfig.port);
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `Listening on: ${appConfig.domain}/${globalPrefix}`
   );
 }
 
